@@ -80,7 +80,9 @@
 			      </div>
                   <?php
 				    if(isset($_GET['cid'])){
+						$cmrId =  Session::get("cmrId");
 						$delDate = $ct->delCustomerCart();
+						$delCompare = $pd->delCompare($cmrId);
 						Session::destroy();
 					}
 				  ?>
@@ -107,7 +109,7 @@
 <div class="menu">
 	<ul id="dc_mega-menu-orange" class="dc_mm-orange">
 	  <li><a href="index.php">Home</a></li>
-	  <li><a href="products.php">Products</a> </li>
+	 
 	  <li><a href="topbrands.php">Top Brands</a></li>
 
        <?php
@@ -117,15 +119,41 @@
 			  <li><a href="payment.php">Payment</a></li>
         <?php } ?>
 
+		<?php
+	   	  $cmrId =  Session::get("cmrId");
+	      $chkOrder = $ct->checkOrder($cmrId);
+		  if($chkOrder){ ?>
+		      <li><a href="order.php">Order</a></li>
+			 
+        <?php } ?>
+
+
 
 	
         <?php 
 		   $login = Session::get("cuslogin");
 		   if($login) { ?>
 		       <li><a href="profile.php">Profile</a></li>  
-		   <?php } ?>  
+		<?php } ?>  
 
-	  <li><a href="contact.php">Contact</a> </li>
+
+		<?php
+		   //$cmrId =  Session::get("cmrId");
+		   $chkCompare = $pd->getCompareProduct($cmrId);
+		   if($chkCompare) { ?>
+	        <li><a href="compare.php">Compare</a> </li>
+		<?php } ?>
+
+
+
+		<?php
+		   //$cmrId =  Session::get("cmrId");
+		   $chkWlist = $pd->checkWlistData($cmrId);
+		   if($chkWlist) { ?>
+	       <li><a href="wishlist.php">Wishlist</a> </li>
+		<?php } ?>
+
+	  
 	  <div class="clear"></div>
 	</ul>
 </div>

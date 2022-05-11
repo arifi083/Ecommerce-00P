@@ -44,7 +44,7 @@
 			<tbody>
              <?php 
 			
-			   $getProduct = $pd->getAllProduct();
+			   $getProduct = $pd->getAllProduct(); 
 			   if($getProduct){
 				   $i = 0;
                    while($result = $getProduct->fetch_assoc()){

@@ -8,7 +8,7 @@
 
 
 <?php
-class Category{
+class Category{ 
     private $db; 
     private $fm;
 

@@ -84,6 +84,7 @@
                 <li class="ic-form-style"><a href=""><span>User Profile</span></a></li>
 		
 				<li class="ic-grid-tables"><a href="inbox.php"><span>Inbox</span></a></li>
+                <li class="ic-grid-tables"><a href="mainorder.php"><span>Order</span></a></li>
                 <li class="ic-charts"><a href=""><span>Visit Website</span></a></li>
             </ul>
         </div>

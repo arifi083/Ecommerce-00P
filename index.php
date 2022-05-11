@@ -13,7 +13,7 @@
     		<div class="clear"></div>
     	</div>
 	      <div class="section group">
-
+ 
 		    <?php 
 			  $getFpd = $pd->getFeatureProduct();
 			  if($getFpd){

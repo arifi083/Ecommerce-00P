@@ -7,7 +7,7 @@
 
 <?php
 class Cart{
-    private $db; 
+    private $db;  
     private $fm;
 
     public function __construct(){
@@ -125,7 +125,59 @@ class Cart{
            }
          } 
        
-         }
+    } //end function
+
+    public function getOrderProduct($cmrId){
+        $query = "SELECT * FROM orders WHERE cmrId ='$cmrId' ORDER BY product_id DESC ";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
+    public function checkOrder($cmrId){
+        $query = "SELECT * FROM orders WHERE cmrId ='$cmrId' ";
+        $result = $this->db->select($query);
+        return $result;
+
+    }
+
+    public function getAllOrderProduct(){
+        $query = "SELECT * FROM orders ORDER BY date";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
+    public function productShifted($id){
+
+        $query = "UPDATE orders
+          SET 
+          status = '1'
+          WHERE id = '$id' ";
+          $update_row = $this->db->update($query);
+          if($update_row){
+            $msg = "<span class='success'>Updated Successfully.</span> ";
+            return $msg;
+          }
+          else{
+             $msg = "<span class='error'> Not Updated .</span> ";
+            return $msg;
+        }
+      
+
+    }
+
+
+    public function delproductShifted($id){
+        $query = "DELETE FROM orders WHERE id = '$id' ";
+        $delete_row = $this->db->delete($query);
+        if($delete_row){
+            $data = "<span class='success'>Data Deleted Successfully </span>";
+            return $data;
+        }
+        else{
+            $data = "<span class='error'> Data Not Deleted Successfully </span>";
+            return $data;
+        }
+    }
 
 
 

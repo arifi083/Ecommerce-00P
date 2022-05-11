@@ -1,26 +1,46 @@
 <?php include 'inc/header.php' ?>
 
 <?php
-if(!isset($_GET['proid']) || $_GET['proid'] == NULL){
-    echo "<script>window.location = '404.php';  </script>";
- }
- else{
-     $id = $_GET['proid'];
- }
+    if (isset($_GET['proid'])) { 
+        $id = $_GET['proid']; 
+    }
+?>
 
- ?>
 
 <?php 
 
-  if($_SERVER['REQUEST_METHOD'] == 'POST'){
+  if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
       $quantity = $_POST['quantity'];
       $addCart = $ct->addToCart($quantity,$id);
   }
 ?> 
 
 
+<?php 
+    
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['campare'])) {
+		$cmrId = Session::get("cmrId");
+        $product_id = $_POST['product_id'];     
+        $insertCom = $pd->inserCompareDate($product_id, $cmrId);
+    }
+?>
+
+<?php 
+    
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['wishlist'])) {
+        $saveWlist = $pd->saveWishListData($id, $cmrId);
+    }
+?>
+ 
+ 
+
   
 
+
+ <style>
+.mybutton{width: 100px;float: left;margin-right: 45px;}	
+
+</style>
 
  <div class="main">
     <div class="content">
@@ -29,7 +49,7 @@ if(!isset($_GET['proid']) || $_GET['proid'] == NULL){
 					
 				<?php
 				  $getPd = $pd->getSingleProduct($id);
-				   if($getPd){
+				   if($getPd){ 
 					  while($result = $getPd->fetch_assoc()){
 				?>
 
@@ -59,7 +79,41 @@ if(!isset($_GET['proid']) || $_GET['proid'] == NULL){
 				?>
 			</span>
 
-			   
+             <?php
+			      if (isset($insertCom)) {
+					echo $insertCom;
+				  }
+
+				  if (isset($saveWlist)) {
+					echo $saveWlist;
+				  }
+
+			 ?>
+
+
+             <?php 
+				$login =  Session::get("cuslogin");
+				if ($login == true) { ?>
+
+			<div class="add-cart">
+    	       <div class="mybutton">  
+                   <form action=" " method="post">
+                       <input type="hidden" class="buyfield" name="product_id" value="<?php echo $result['id']; ?>"/> 
+					   <input type="submit" class="buysubmit" name="campare" value="Add to Campare"/>
+    	           </form>	
+    	       </div class="mybutton">
+			       <form action="" method="post">
+				     <input type="submit" class="buysubmit" name="wishlist" value="Wishlist"/>
+
+				   </form>
+			   <div>
+
+			   </div>
+
+			</div> 
+				
+			<?php  } ?>	
+              
 			   </div>
 			   <div class="product-desc">
 			      <h2>Product Details</h2>

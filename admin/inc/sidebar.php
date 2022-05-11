@@ -9,7 +9,7 @@
                         <li><a href="copyright.php">Copyright</a></li>
                         
                     </ul>
-                </li>
+                </li> 
 				
              
 				<li><a class="menuitem">Slider Option</a>

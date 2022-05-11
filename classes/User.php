@@ -8,7 +8,7 @@
 
 <?php
 
-
+ 
 class User{
     private $db; 
     private $fm;
@@ -73,7 +73,7 @@ class User{
             $value = $result->fetch_assoc();
             Session::set("cuslogin",true);
             Session::set("cmrId",$value['id']);
-            Session::set("cmrName",$value['name']);
+            Session::set("cmrName",$value['name']); 
             header("Location:cart.php");
         }
         else{
@@ -130,6 +130,12 @@ class User{
         }
         
         
+    }  //end function
+
+    public function getCustomerData($id){
+        $query ="SELECT * FROM  user WHERE id='$id' ";
+        $result = $this->db->select($query);
+        return $result;
     }
 
 }
